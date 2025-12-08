@@ -11,7 +11,7 @@ import { CommandMenu } from "@/components/command-menu";
 const Navbar = () => {
   const navItems = [
     { title: "Projects", href: "/projects" },
-    { title: "Contact", href: "/Contact" },
+    { title: "Contact", href: "https://cal.com/rishab-agarwal/30min" },
   ];
 
   const [hovered, setHovered] = useState<number | null>(null);
