@@ -9,15 +9,19 @@ import { ThemeToggleButton } from "@/components/ui/skiper-ui/skiper26";
 import { CommandMenu } from "@/components/command-menu";
 
 const Navbar = () => {
-  const navItems = [
-    { title: "Projects", href: "/projects" },
-    { title: "Contact", href: "https://cal.com/rishab-agarwal/30min" },
-  ];
-
   const [hovered, setHovered] = useState<number | null>(null);
   const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState<boolean>(false);
   const [isDesktop, setIsDesktop] = useState(true);
+  const whatsappNumber = "918509064884";
+  const message = encodeURIComponent(
+    "Hey Rishav! I came across your portfolio and would love to collaborate.",
+  );
+  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${message}`;
+  const navItems = [
+    { title: "Projects", href: "/projects" },
+    { title: "Contact", href: whatsappLink },
+  ];
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 20);
