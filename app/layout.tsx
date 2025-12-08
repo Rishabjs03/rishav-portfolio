@@ -1,0 +1,44 @@
+import type { Metadata } from "next";
+import "./globals.css";
+import Footer from "@/components/footer";
+import Navbar from "@/components/Navbar";
+import { Instrument_Serif } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { ThemeProvider } from "@/components/theme-provider";
+import FractalTree from "@/components/ui/fractal-tree";
+
+const instrumentSerif = Instrument_Serif({
+  weight: ["400"],
+  subsets: ["latin"], // 🛠 Fix missing subsets
+});
+
+export const metadata: Metadata = {
+  title: "Rishav",
+  description: "I'm a Full-stack Developer and AI enthusiast",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      {" "}
+      {/* 🛠 Important for dark mode */}
+      <body
+        className={`${instrumentSerif.className} bg-neutral-50 antialiased transition-colors duration-300 [--pattern-fg:var(--color-neutral-200)] dark:bg-neutral-950`}
+      >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Analytics />
+          <SpeedInsights />
+          <FractalTree />
+          <Navbar />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
