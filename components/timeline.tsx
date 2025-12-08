@@ -65,7 +65,7 @@ export const Timeline = () => {
       href: "https://askguru-six.vercel.app/",
       content: [
         {
-          title: "AI & UI/UX Developer | 2025 — Present",
+          title: "AI & UI/UX Developer | Oct 2025 — Nov 2025",
           description: `
             Contributed to building the intelligent AI chatbot architecture for AskGuru’s platform
             Led the design and implementation of the complete UI/UX for the entire web interface

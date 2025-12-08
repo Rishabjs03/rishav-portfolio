@@ -6,7 +6,7 @@ import { Instrument_Serif } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "@/components/theme-provider";
-import FractalTree from "@/components/ui/fractal-tree";
+import ParticleNetwork from "@/components/ui/particle-network";
 
 const instrumentSerif = Instrument_Serif({
   weight: ["400"],
@@ -33,7 +33,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Analytics />
           <SpeedInsights />
-          <FractalTree />
+          <ParticleNetwork />
           <Navbar />
           <main className="min-h-screen">{children}</main>
           <Footer />
