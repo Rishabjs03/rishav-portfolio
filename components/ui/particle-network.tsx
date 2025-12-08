@@ -78,14 +78,14 @@ const ParticleNetwork = () => {
       // Determine colors based on theme
       const isDark = theme === "dark";
       const particleColor = isDark
-        ? "rgba(255, 255, 255, 0.5)"
-        : "rgba(0, 0, 0, 0.5)";
+        ? "rgba(255, 255, 255, 0.8)"
+        : "rgba(0, 0, 0, 0.6)";
       const lineColor = isDark
-        ? "rgba(255, 255, 255, 0.05)"
-        : "rgba(0, 0, 0, 0.05)";
+        ? "rgba(255, 255, 255, 0.15)"
+        : "rgba(0, 0, 0, 0.15)";
       const mouseLineColor = isDark
-        ? "rgba(255, 255, 255, 0.1)"
-        : "rgba(0, 0, 0, 0.1)";
+        ? "rgba(255, 255, 255, 0.3)"
+        : "rgba(0, 0, 0, 0.3)";
 
       ctx.clearRect(0, 0, dimensions.width, dimensions.height);
 
@@ -152,7 +152,7 @@ const ParticleNetwork = () => {
   }, [dimensions, theme]);
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[-1] opacity-60">
+    <div className="pointer-events-none fixed inset-0 z-[-1]">
       <canvas ref={canvasRef} />
     </div>
   );
