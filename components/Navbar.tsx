@@ -13,14 +13,10 @@ const Navbar = () => {
   const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState<boolean>(false);
   const [isDesktop, setIsDesktop] = useState(true);
-  const whatsappNumber = "918509064884";
-  const message = encodeURIComponent(
-    "Hey Rishav! I came across your portfolio and would love to collaborate.",
-  );
-  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${message}`;
+
   const navItems = [
     { title: "Projects", href: "/projects" },
-    { title: "Contact", href: whatsappLink },
+    { title: "Contact", href: "https://cal.com/rishab-agarwal/30min" },
   ];
 
   useMotionValueEvent(scrollY, "change", (latest) => {
