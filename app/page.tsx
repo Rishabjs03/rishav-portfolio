@@ -49,7 +49,7 @@ export default function Home() {
 
         <div className="flex w-full flex-wrap items-center justify-between gap-4">
           <h1 className="font-custom text-3xl font-bold tracking-tight text-neutral-900 md:text-3xl dark:text-neutral-50">
-            <span className="link--elara">Rishav</span>
+            <span className="link--elara">Rishav Agarwal</span>
           </h1>
 
           <div className="flex flex-wrap gap-4 sm:justify-end">

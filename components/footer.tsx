@@ -21,9 +21,9 @@ const Footer = () => {
     <footer className="w-full bg-neutral-50 dark:bg-neutral-950">
       <Container className="flex flex-col items-center justify-between gap-4 border border-neutral-200 py-2 sm:flex-row dark:border-neutral-800">
         <p className="font-custom2 text-sm tracking-normal text-neutral-600 transition-colors duration-300 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100">
-          Built with love and on collaboration with{" "}
-          <a href="https://x.com/Ashutosh_7x7?s=20" className="hover:underline">
-            Karn Singh
+          Built with love by{" "}
+          <a href="https://x.com/Yrishavjs" className="hover:underline">
+            Rishav Agarwal
           </a>
         </p>
         <div className="ml-9 flex items-center gap-4">
