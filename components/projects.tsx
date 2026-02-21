@@ -13,6 +13,7 @@ import {
   SiThreedotjs,
   SiPrisma,
   SiCloudflare,
+  SiPython,
   SiLangchain,
   SiNodedotjs,
 } from "react-icons/si";
@@ -24,6 +25,7 @@ type TechKey =
   | "three"
   | "prisma"
   | "cloud"
+  | "python"
   | "langchain"
   | "node";
 
@@ -44,6 +46,7 @@ const iconMap: Record<TechKey, any> = {
   three: SiThreedotjs,
   prisma: SiPrisma,
   cloud: SiCloudflare,
+  python: SiPython,
   langchain: SiLangchain,
   node: SiNodedotjs,
 };
@@ -55,6 +58,7 @@ const techNames: Record<TechKey, string> = {
   three: "Three.js",
   prisma: "Prisma",
   cloud: "Cloudflare",
+  python: "Python",
   langchain: "LangChain",
   node: "Node.js",
 };
@@ -72,6 +76,16 @@ const Projects = ({ showAll = false }: { showAll?: boolean }) => {
   }, []);
 
   const projects: Project[] = [
+    {
+      title: "ClipCraft AI",
+      src: "/nova.png",
+      video: "/9feipLbs5TQANcQI.mp4",
+      description:
+        "An AI-powered video generator — enter a prompt and get a polished promo video. Claude AI writes the copy and Remotion renders the motion graphics, all automated end-to-end.",
+      tech: ["ts", "next", "python"],
+      github: "https://github.com/Rishabjs03/ClipCraft-Ai",
+      live: "https://github.com/Rishabjs03/ClipCraft-Ai",
+    },
     {
       title: "Nova AI",
       src: "/nova.png",

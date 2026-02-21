@@ -8,6 +8,7 @@ import {
   SiThreedotjs,
   SiPrisma,
   SiCloudflare,
+  SiPython,
   SiLangchain,
   SiNodedotjs,
 } from "react-icons/si";
@@ -19,6 +20,7 @@ type TechKey =
   | "three"
   | "prisma"
   | "cloud"
+  | "python"
   | "langchain"
   | "node";
 
@@ -29,6 +31,7 @@ const iconMap: Record<TechKey, any> = {
   three: SiThreedotjs,
   prisma: SiPrisma,
   cloud: SiCloudflare,
+  python: SiPython,
   langchain: SiLangchain,
   node: SiNodedotjs,
 };
@@ -40,6 +43,7 @@ const techNames: Record<TechKey, string> = {
   three: "Three.js",
   prisma: "Prisma",
   cloud: "Cloudflare",
+  python: "Python",
   langchain: "LangChain",
   node: "Node.js",
 };
@@ -60,6 +64,25 @@ export const Timeline = () => {
   const [hoveredTech, setHoveredTech] = useState<string | null>(null);
 
   const data: Data[] = [
+    {
+      title: "NAWKOUT",
+      href: "https://nawkout.com",
+      content: [
+        {
+          title: "Full Stack & AI Developer | Dec 2025 — Present",
+          description: `
+            Built an end-to-end AI-powered CEO CRM Tool, handling the entire development lifecycle from concept to production
+            Took the product from 0 to 100 in under 1 month, delivering a fully functional platform at rapid pace
+            Primarily worked with Python and TypeScript to build robust backend services and dynamic frontends
+            Automated every workflow end-to-end, streamlining operations and eliminating manual processes
+            Managed the full stack independently — from AI integrations and backend APIs to frontend UI and deployment
+          `,
+          src: "/nawkout.png",
+          href: "https://nawkout.com",
+          tech: ["python", "ts", "next", "node"],
+        },
+      ],
+    },
     {
       title: "AskGuru.ai",
       href: "https://askguru-six.vercel.app/",
