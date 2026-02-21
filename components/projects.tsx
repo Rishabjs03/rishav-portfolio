@@ -88,7 +88,6 @@ const Projects = ({ showAll = false }: { showAll?: boolean }) => {
     {
       title: "Nova AI",
       src: "/nova.png",
-      video: "/inquiro.mp4", // Kept original video placeholder as no video source was found
       description:
         "Nova AI is an advanced multi-modal assistant that can read webpages, research live information, run Python code, and interact through natural voice conversations.",
       tech: ["langchain", "ts", "next"],
@@ -98,7 +97,6 @@ const Projects = ({ showAll = false }: { showAll?: boolean }) => {
     {
       title: "Converso",
       src: "/converso.jpg",
-      video: "/inquiro.mp4",
       description:
         "An AI-powered learning companion that lets students discuss topics and concepts in real time with an intelligent study partner.",
       tech: ["next", "ts", "react"],
@@ -108,7 +106,6 @@ const Projects = ({ showAll = false }: { showAll?: boolean }) => {
     {
       title: "SkillSwap",
       src: "/skillswap.png",
-      video: "/scribble.mp4",
       description:
         "A micro-gig platform where people list their specialized skills, host learning sessions, and earn per hour — complete with real-time chatting.",
       tech: ["next", "ts", "prisma"],
@@ -118,7 +115,6 @@ const Projects = ({ showAll = false }: { showAll?: boolean }) => {
     {
       title: "XMatch",
       src: "/xmatch-new.png",
-      video: "/scribble.mp4",
       description:
         "A Tinder-style matchmaking app for developers — chat, match, and connect with fellow devs using real-time communication.",
       tech: ["next", "prisma", "node"],
