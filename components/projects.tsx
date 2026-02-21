@@ -31,8 +31,8 @@ type TechKey =
 
 interface Project {
   title: string;
-  src: string;
-  video: string;
+  src?: string;
+  video?: string;
   description: string;
   tech: TechKey[];
   github: string;
@@ -78,7 +78,6 @@ const Projects = ({ showAll = false }: { showAll?: boolean }) => {
   const projects: Project[] = [
     {
       title: "ClipCraft AI",
-      src: "/nova.png",
       video: "/9feipLbs5TQANcQI.mp4",
       description:
         "An AI-powered video generator — enter a prompt and get a polished promo video. Claude AI writes the copy and Remotion renders the motion graphics, all automated end-to-end.",
@@ -153,14 +152,25 @@ const Projects = ({ showAll = false }: { showAll?: boolean }) => {
             {/* Glow */}
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_130%,rgba(0,0,0,0.08),transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:bg-[radial-gradient(circle_at_50%_130%,rgba(255,255,255,0.10),transparent_75%)]" />
 
-            {/* IMAGE */}
+            {/* MEDIA */}
             <div className="relative h-44 w-full overflow-hidden">
-              <Image
-                src={project.src}
-                alt={project.title}
-                fill
-                className="object-cover"
-              />
+              {project.video ? (
+                <video
+                  src={project.video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+              ) : project.src ? (
+                <Image
+                  src={project.src}
+                  alt={project.title}
+                  fill
+                  className="object-cover"
+                />
+              ) : null}
 
               {/* Black tint overlay */}
               <div className="absolute inset-0 bg-black/0 transition-all duration-500 group-hover:bg-black/10" />

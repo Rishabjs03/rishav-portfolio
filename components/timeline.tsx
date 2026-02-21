@@ -54,6 +54,7 @@ type Data = {
   content: {
     title: string;
     description: string;
+    location?: string;
     src: string;
     href: string;
     tech?: TechKey[];
@@ -70,6 +71,7 @@ export const Timeline = () => {
       content: [
         {
           title: "Full Stack & AI Developer | Dec 2025 — Present",
+          location: "Houston, USA · Remote",
           description: `
             Built an end-to-end AI-powered CEO CRM Tool, handling the entire development lifecycle from concept to production
             Took the product from 0 to 100 in under 1 month, delivering a fully functional platform at rapid pace
@@ -89,6 +91,7 @@ export const Timeline = () => {
       content: [
         {
           title: "AI & UI/UX Developer | Oct 2025 — Nov 2025",
+          location: "India · Remote",
           description: `
             Contributed to building the intelligent AI chatbot architecture for AskGuru’s platform
             Led the design and implementation of the complete UI/UX for the entire web interface
@@ -137,6 +140,11 @@ export const Timeline = () => {
                   <h3 className="font-medium text-neutral-900 dark:text-neutral-50">
                     {item.title}
                   </h3>
+                  {item.location && (
+                    <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+                      📍 {item.location}
+                    </p>
+                  )}
                   <ul className="list-disc py-5 pl-6">
                     {item.description
                       .toString()
