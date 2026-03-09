@@ -16,6 +16,7 @@ import {
   SiPython,
   SiLangchain,
   SiNodedotjs,
+  SiSupabase,
 } from "react-icons/si";
 
 type TechKey =
@@ -27,7 +28,8 @@ type TechKey =
   | "cloud"
   | "python"
   | "langchain"
-  | "node";
+  | "node"
+  | "supabase";
 
 interface Project {
   title: string;
@@ -49,6 +51,7 @@ const iconMap: Record<TechKey, any> = {
   python: SiPython,
   langchain: SiLangchain,
   node: SiNodedotjs,
+  supabase: SiSupabase,
 };
 
 const techNames: Record<TechKey, string> = {
@@ -61,6 +64,7 @@ const techNames: Record<TechKey, string> = {
   python: "Python",
   langchain: "LangChain",
   node: "Node.js",
+  supabase: "Supabase",
 };
 
 const Projects = ({ showAll = false }: { showAll?: boolean }) => {
@@ -76,6 +80,15 @@ const Projects = ({ showAll = false }: { showAll?: boolean }) => {
   }, []);
 
   const projects: Project[] = [
+    {
+      title: "Zero",
+      video: "/zero.mp4",
+      description:
+        "An AI-powered search engine for discovering indie software products. Describe your problem in natural language and instantly surface the best matching tools built by independent developers.",
+      tech: ["next", "ts", "supabase"],
+      github: "https://github.com/Rishabjs03",
+      live: "https://zero.rishabjs.xyz",
+    },
     {
       title: "ClipCraft AI",
       video: "/9feipLbs5TQANcQI.mp4",
