@@ -17,6 +17,8 @@ import {
   SiLangchain,
   SiNodedotjs,
   SiSupabase,
+  SiGoogle,
+  SiOpencv,
 } from "react-icons/si";
 
 type TechKey =
@@ -29,7 +31,9 @@ type TechKey =
   | "python"
   | "langchain"
   | "node"
-  | "supabase";
+  | "supabase"
+  | "google"
+  | "opencv";
 
 interface Project {
   title: string;
@@ -52,6 +56,8 @@ const iconMap: Record<TechKey, any> = {
   langchain: SiLangchain,
   node: SiNodedotjs,
   supabase: SiSupabase,
+  google: SiGoogle,
+  opencv: SiOpencv,
 };
 
 const techNames: Record<TechKey, string> = {
@@ -65,6 +71,8 @@ const techNames: Record<TechKey, string> = {
   langchain: "LangChain",
   node: "Node.js",
   supabase: "Supabase",
+  google: "Gemini",
+  opencv: "OpenCV",
 };
 
 const Projects = ({ showAll = false }: { showAll?: boolean }) => {
@@ -133,6 +141,24 @@ const Projects = ({ showAll = false }: { showAll?: boolean }) => {
       tech: ["next", "prisma", "node"],
       github: "https://github.com/Rishabjs03",
       live: "https://tinder-clone-red.vercel.app/",
+    },
+    {
+      title: "Gemini-Supermemory",
+      src: "/gemini-supermemory.png",
+      description:
+        "A Gemini CLI extension providing persistent AI memory across sessions and projects using Supermemory. Features auto-capture, codebase architecture indexing, and team-shared knowledge via MCP tools.",
+      tech: ["google", "node", "ts"],
+      github: "https://github.com/Rishabjs03/gemini-supermemory",
+      live: "https://github.com/Rishabjs03/gemini-supermemory",
+    },
+    {
+      title: "MacClaw",
+      video: "/MacClaw.mp4",
+      description:
+        "A macOS gesture control system that maps hand movements to desktop actions using Python and MediaPipe. Supports real-time cursor tracking, pinch-to-click, and gesture-based scrolling/dragging.",
+      tech: ["python", "opencv"],
+      github: "https://github.com/Rishabjs03/MacClaw",
+      live: "https://github.com/Rishabjs03/MacClaw",
     },
   ];
 
