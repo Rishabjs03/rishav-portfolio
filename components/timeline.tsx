@@ -66,11 +66,31 @@ export const Timeline = () => {
 
   const data: Data[] = [
     {
+      title: "Array Education",
+      href: "https://arrayeducation.org",
+      content: [
+        {
+          title: "AI Engineer | Apr 2026 — Present",
+          location: "USA · Remote",
+          description: `
+            Solely architected and built an end-to-end AI Video Studio for generating career-focused video content for high school students across the US, set to be distributed on Overgrad's student platform
+            Owned the full stack from pipeline architecture and API integrations (Kling, fal.ai, Claude) to frontend (Next.js, TypeScript) and backend (Python) development
+            Designed and optimized multi-stage prompt engineering workflows using Claude and LLMs to drive character consistency across voice, wardrobe, appearance, and background visuals — with zero human talent involvement
+            Reduced per-minute video production cost to under $10, matching influencer-level production quality at a fraction of the cost through an Applied AI workflow
+            Currently iterating and refining the product pipeline in preparation for full-scale deployment to Overgrad's student network
+          `,
+          src: "/array.png",
+          href: "https://arrayeducation.org",
+          tech: ["python", "next", "ts"],
+        },
+      ],
+    },
+    {
       title: "NAWKOUT",
       href: "https://nawkout.com",
       content: [
         {
-          title: "Full Stack & AI Developer | Dec 2025 — Present",
+          title: "Full Stack & AI Developer | Dec 2025 — Apr 2026",
           location: "Houston, USA · Remote",
           description: `
             Built an end-to-end AI-powered CEO CRM Tool, handling the entire development lifecycle from concept to production
