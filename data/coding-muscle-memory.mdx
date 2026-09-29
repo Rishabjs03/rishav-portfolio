@@ -11,7 +11,7 @@ import CodeBlock from '@/components/CodeBlock'
 
 Tailwind CSS is a utility-first CSS framework that helps you build designs quickly by composing small, single-purpose classes directly in your markup. This guide is short, practical, and aimed at developers who want to get productive with Tailwind right away.
 
-> TL;DR — Install Tailwind, use utility classes in your HTML/JSX, and compose responsive, accessible components without writing custom CSS for every variation.
+> TL;DR: Install Tailwind, use utility classes in your HTML/JSX, and compose responsive, accessible components without writing custom CSS for every variation.
 
 ---
 
@@ -23,7 +23,7 @@ Instead of writing CSS classes like `.btn-primary { padding: 8px 16px; backgroun
 <button class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Click</button>
 ```
 
-This makes styles explicit, easy to iterate, and highly reusable — you build components by composing small building blocks.
+This makes styles explicit, easy to iterate, and highly reusable: you build components by composing small building blocks.
 
 ---
 
@@ -61,7 +61,7 @@ module.exports = {
 
 ---
 
-## Core Concepts — Fast
+## Core Concepts, Fast
 
 - **Utilities**: single-purpose classes (`p-4`, `text-sm`, `bg-gray-100`).
 - **Responsive**: prefix utilities with breakpoints (`md:p-6`).
@@ -105,7 +105,7 @@ const btn = 'px-3 py-2 rounded-md inline-flex items-center';
 <button className={`${btn} bg-indigo-600 text-white`}>Save</button>
 ```
 
-- **Use `@apply`** inside your own `.css` files for reusable groups when appropriate (keep it light — Tailwind shines when you compose in markup).
+- **Use `@apply`** inside your own `.css` files for reusable groups when appropriate (keep it light; Tailwind shines when you compose in markup).
 
 - **Purge unused styles** by configuring `content` so your production bundle stays small.
 
@@ -117,7 +117,7 @@ const btn = 'px-3 py-2 rounded-md inline-flex items-center';
 
 - Always provide accessible focus states (`focus:outline-none focus:ring-2 focus:ring-offset-2`).
 - Use semantic HTML (`<button>`, `<nav>`, `<main>`, `<article>`).
-- Ensure color contrast — prefer Tailwind's built-in gray/blue palettes or add your own tested colors.
+- Ensure color contrast: prefer Tailwind's built-in gray/blue palettes or add your own tested colors.
 
 ---
 
@@ -129,7 +129,7 @@ const btn = 'px-3 py-2 rounded-md inline-flex items-center';
 <button class="px-4 py-2 rounded shadow-sm bg-green-600 hover:bg-green-700 text-white">Save</button>
 ```
 
-### Forms — stacked inputs
+### Forms: stacked inputs
 
 ```html
 <label class="block">
@@ -156,7 +156,7 @@ const btn = 'px-3 py-2 rounded-md inline-flex items-center';
 
 ---
 
-## Next steps — where to go from here
+## Next steps: where to go from here
 
 1. Read the official docs (utility reference + components).  
 2. Try implementing a small UI (landing page header, card list, or form).  
@@ -173,4 +173,4 @@ If you'd like, I can:
 - Provide a downloadable `tailwind.config.js` starter file.  
 - Convert the examples into a Next.js page and a Storybook story.
 
-Tell me which format you want next — or if you want edits to tone, length, or audience (beginner, product designer, or advanced frontend engineer).
+Tell me which format you want next, or if you want edits to tone, length, or audience (beginner, product designer, or advanced frontend engineer).

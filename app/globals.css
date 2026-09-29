@@ -1,185 +1,332 @@
-/* ✅ Correct Google Fonts imports */
-@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;700&display=swap");
-@plugin "@tailwindcss/typography";
 @import "tailwindcss";
-/* remove this line if you don't have it installed */
-@import "tw-animate-css";
-@import "cal-heatmap/cal-heatmap.css";
+@import "lenis/dist/lenis.css";
+@plugin "@tailwindcss/typography";
 
+/*
+ * ─── Design tokens ──────────────────────────────────────────────────────────
+ * Mirrors lib/design-tokens.ts. Tailwind generates utilities from these:
+ * text-graphite, stroke-construction, bg-paper, font-hand, font-arch …
+ * Light "paper" only: there is deliberately no dark theme.
+ */
+@theme {
+  --color-paper: #fdfdfb;
+  --color-paper-shade: #f4f3ee;
+  --color-graphite: #2b2b2b;
+  --color-graphite-2: #6b6b6b;
+  --color-construction: #b5b5b5;
+  --color-accent-blue: #3a5ba0;
+  --color-accent-red: #c0392b;
 
-@custom-variant dark (&:is(.dark *));
+  --container-page: 60rem;
 
-/* Custom selection color */
-::selection {
-  background: #c7c6c6;
-  
-  /* bright yellow highlight */
-  color: #000;
-  /* black text */
+  --ease-pencil: cubic-bezier(0.6, 0.05, 0.3, 1);
 }
 
-/* Optional: for Firefox */
-::-moz-selection {
-  background: #58553e;
-  color: #000;
-}
-
-
-/* === Custom theme variables === */
 @theme inline {
-  --color-primary: var(--color-neutral-800);
-  --color-secondary: var(--color-neutral-600);
-  --font-custom: "Instrument Serif", serif;
-  --font-custom2: "Instrument Sans", sans-serif;
-  --color-border: var(--border);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-background: var(--background);
+  --font-hand: var(--font-caveat), "Comic Sans MS", cursive;
+  --font-arch: var(--font-architects), var(--font-caveat), cursive;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
 }
 
-/* ✅ Move this OUTSIDE of @theme inline */
-:root {
-  --shadow-input: 0px 2px 3px -1px rgba(0, 0, 0, 0.1),
-    0px 1px 0px 0px rgba(25, 28, 33, 0.02),
-    0px 0px 0px 1px rgba(25, 28, 33, 0.08);
-  --section-shadow: rgba(34, 42, 53, 0.06) 0px 0px 24px, rgba(0, 0, 0, 0.05) 0px 1px 1px,
-    rgba(34, 42, 53, 0.04) 0px 0px 0px 1px, rgba(34, 42, 53, 0.08) 0px 0px 4px,
-    rgba(47, 48, 55, 0.05) 0px 16px 68px,
-    rgba(255, 255, 255, 0.1) 0px 1px 0px inset;
-  --background: oklch(1 0 0);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --border: oklch(0.92 0.004 286.32);
-  --pattern-fg: #d1d5db;
+/* ─── Paper ─────────────────────────────────────────────────────────────── */
+
+html {
+  color-scheme: light;
+  color: var(--color-graphite);
+  /* Paper grain: tiny SVG noise tile, rendered once as an image. */
+  background-color: var(--color-paper);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .17 0 0 0 0 .17 0 0 0 0 .16 0 0 0 .055 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  -webkit-font-smoothing: antialiased;
 }
 
-.dark {
-  --color-primary: var(--color-neutral-100);
-  --color-secondary: var(--color-neutral-300);
-  --background: oklch(0.141 0.005 285.823);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --border: oklch(0.274 0.006 286.033);
-  --pattern-fg: #404040;
-  
+body {
+  min-height: 100dvh;
+  font-family: var(--font-sans);
+  background: transparent;
 }
 
-/* === Minimal SVG Underline Animation (Elara style) === */
-.link--elara {
-  position: relative;
-  overflow: hidden;
-}
-
-.link--elara::before {
+/* Graph-paper grid, fixed behind everything, fading out toward the edges. */
+body::before {
   content: "";
-  position: absolute;
-  bottom: 0;
-  left: 5;
-  /* fixed invalid "left:5" */
-  width: 93%;
-  height: 1px;
-  background: currentColor;
-  transform-origin: 50% 100%;
-  transition: clip-path 0.3s, transform 0.3s cubic-bezier(0.2, 1, 0.8, 1);
-  clip-path: polygon(0% 0%, 0% 100%, 0 100%, 0 0,
-      100% 0, 100% 100%, 0 100%, 0 100%, 100% 100%, 100% 0%);
-}
-
-.link--elara:hover::before {
-  transform: translate3d(0, 2px, 0) scale3d(1.08, 2, 1);
-  clip-path: polygon(0% 0%, 0% 100%, 50% 100%, 50% 0,
-      50% 0, 50% 100%, 50% 100%, 0 100%, 100% 100%, 100% 0%);
-}
-
-/* === Prose Styling for Dark Mode === */
-.prose {
-  @apply text-neutral-900 dark:text-neutral-100;
-}
-
-.prose p {
-  @apply text-neutral-700 dark:text-neutral-300;
-}
-
-.prose h1,
-.prose h2,
-.prose h3,
-.prose h4,
-.prose h5,
-.prose h6 {
-  @apply text-neutral-900 dark:text-neutral-50;
-}
-
-.prose a {
-  @apply text-blue-600 dark:text-blue-400 hover:underline;
-}
-
-.prose code {
-  @apply bg-blue-900 dark:bg-blue-900 text-blue-100 dark:text-blue-100 px-1.5 py-0.5 rounded text-sm font-mono;
-}
-
-.prose pre {
-  @apply bg-blue-900 dark:bg-blue-900 text-blue-100 dark:text-blue-100 p-4 rounded-lg overflow-x-auto border border-blue-800 dark:border-blue-800;
-}
-
-
-
-
-
-.prose strong {
-  @apply text-neutral-900 dark:text-neutral-50;
-}
-
-.prose ul,
-.prose ol {
-  @apply text-neutral-700 dark:text-neutral-300;
-}
-
-.prose li {
-  @apply text-neutral-700 dark:text-neutral-300;
-}
-
-
-/* === Scribble Animated Underline for Headings (.link--carme) === */
-
-.link--carme {
-  position: relative;
-  display: inline-block;
-  padding-bottom: 14px;
-  /* Space for underline */
-  cursor: pointer;
-  font-size: inherit;
-  /* Keeps original text size (e.g. h1, h2) */
-  font-weight: inherit;
-}
-
-/* Inline SVG container (automatically positioned) */
-.link--carme svg {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 120px;
-  /* Adjust length of scribble */
-  height: 18px;
+  position: fixed;
+  inset: 0;
+  z-index: -1;
   pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgb(43 43 43 / 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(43 43 43 / 0.055) 1px, transparent 1px),
+    linear-gradient(to right, rgb(43 43 43 / 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(43 43 43 / 0.025) 1px, transparent 1px);
+  background-size:
+    120px 120px,
+    120px 120px,
+    24px 24px,
+    24px 24px;
+  background-position: center top;
+  mask-image: radial-gradient(
+    ellipse 75% 70% at 50% 45%,
+    #000 35%,
+    transparent 100%
+  );
 }
 
-/* Scribble line style */
-.link--carme path {
-  stroke: currentColor;
-  /* Matches text color */
-  stroke-width: 2.3px;
-  fill: none;
-  stroke-linecap: round;
-
-  /* Hide stroke initially (for animation) */
-  stroke-dasharray: 200;
-  stroke-dashoffset: 200;
-
-  transition: stroke-dashoffset 0.5s ease-out;
+::selection {
+  background: rgb(58 91 160 / 0.18);
+  color: var(--color-graphite);
 }
 
-/* Animate on hover */
-.link--carme:hover path {
+/* ─── Focus ─────────────────────────────────────────────────────────────── */
+/*
+ * Fallback focus ring (no JS). <FocusScribble> replaces it with a scribbled
+ * pencil loop and sets .focus-scribble on <html>; the outline then turns
+ * transparent, which still shows in Windows high-contrast mode.
+ */
+:focus-visible {
+  outline: 2px dashed var(--color-accent-blue);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+.focus-scribble :focus-visible {
+  outline-color: transparent;
+}
+
+/* ─── Pencil cursor ─────────────────────────────────────────────────────── */
+.pencil-cursor,
+.pencil-cursor * {
+  cursor: none !important;
+}
+
+/*
+ * ─── Draw-on: GSAP-driven (<DrawOnSVG>, hero, building) ───────────────────
+ * `.js` is added by an inline script before first paint, so without JS the
+ * drawings are simply visible. Strokes need pathLength="1" (see lib/draw.ts
+ * for why dasharray "1 2" + offset 1.01 hides a stroke).
+ */
+.js [data-draw-root]:not([data-drawn]) [data-draw] {
+  stroke-dasharray: 1 2;
+  stroke-dashoffset: 1.01;
+}
+.js [data-draw-root]:not([data-drawn]) [data-draw-fade],
+.js
+  [data-draw-root][data-draw-all]:not([data-drawn])
+  :is(path, circle, ellipse, rect, line, polyline, polygon) {
+  opacity: 0;
+}
+
+/*
+ * ─── Draw-on: CSS-driven (borders, stickers, annotations, underlines) ─────
+ * Cheaper than a GSAP timeline per card. A parent gets [data-play] when it
+ * scrolls into view; each `.draw-path` then animates with its own
+ * --draw-dur / --draw-delay (set inline by the component).
+ */
+.js .draw-path {
+  stroke-dasharray: 1 2;
+  stroke-dashoffset: 1.01;
+}
+.js [data-play] .draw-path {
+  animation: pencil-draw var(--draw-dur, 0.9s) var(--draw-delay, 0s)
+    var(--ease-pencil) forwards;
+}
+@keyframes pencil-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Hover scribbles: drawn on hover/focus, erased (reversed) on leave. */
+.scribble-hover path {
+  stroke-dasharray: 1 2;
+  stroke-dashoffset: 1.01;
+  transition: stroke-dashoffset 0.45s var(--ease-pencil);
+}
+.group:hover .scribble-hover path,
+.group:focus-visible .scribble-hover path,
+.group[data-active] .scribble-hover path {
   stroke-dashoffset: 0;
+}
+
+/*
+ * ─── Handwritten headings ─────────────────────────────────────────────────
+ * Each letter is revealed left-to-right by a clip-path wipe, one after the
+ * other (--i is the letter index). The em-based negative insets leave room
+ * for the loops and tails of the script font, which overhang each glyph.
+ */
+.js .hw-letter {
+  clip-path: inset(-0.35em calc(100% + 0.45em) -0.45em -0.45em);
+}
+.js [data-play] .hw-letter {
+  animation: hw-write var(--hw-dur, 0.34s)
+    calc(var(--hw-delay, 0s) + var(--i) * var(--hw-stagger, 0.045s))
+    cubic-bezier(0.45, 0, 0.25, 1) forwards;
+}
+@keyframes hw-write {
+  to {
+    clip-path: inset(-0.35em -0.45em -0.45em -0.45em);
+  }
+}
+
+/*
+ * Plain fade-and-settle for annotation text and small labels. A keyframe
+ * animation (not a transition) so it also plays when [data-play] is already
+ * in the server-rendered HTML, e.g. in the hero.
+ */
+.js .ink-in {
+  opacity: 0;
+}
+.js [data-play] .ink-in {
+  opacity: 1;
+  animation: ink-in 0.6s var(--ease-pencil) var(--ink-delay, 0s) both;
+}
+@keyframes ink-in {
+  from {
+    opacity: 0;
+    transform: translateY(3px) rotate(-1deg);
+  }
+}
+
+/* Proof-of-work tab switch: scrawl over the cards, then fade. */
+@keyframes scribble-cross {
+  0% {
+    stroke-dashoffset: 1.01;
+    opacity: 1;
+  }
+  45% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+
+/* Skills: cross-hatch shading scribbled into a logo on hover. */
+.skill-tile:hover .traced-icon path {
+  fill: url(#crosshatch-icon);
+}
+
+/* Card wobble when a border is redrawn on hover. Transform only. */
+@keyframes wobble {
+  0% {
+    rotate: 0deg;
+  }
+  30% {
+    rotate: -0.45deg;
+  }
+  65% {
+    rotate: 0.3deg;
+  }
+  100% {
+    rotate: 0deg;
+  }
+}
+.wobble-once {
+  animation: wobble 0.45s ease-out;
+}
+
+/* Loader: pencil tracing a spiral, forever (CSS only, works as SSR fallback). */
+.spiral-path {
+  stroke-dasharray: 1 2;
+  animation: spiral-draw 2.6s linear infinite;
+}
+@keyframes spiral-draw {
+  0% {
+    stroke-dashoffset: 1.01;
+    opacity: 1;
+  }
+  80% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+.spiral-pencil {
+  offset-rotate: 0deg;
+  offset-anchor: 0% 100%;
+  animation: spiral-follow 2.6s linear infinite;
+}
+@keyframes spiral-follow {
+  0% {
+    offset-distance: 0%;
+  }
+  80%,
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+/* ─── Reduced motion: show every drawing finished, no movement ─────────── */
+@media (prefers-reduced-motion: reduce) {
+  .js [data-draw-root]:not([data-drawn]) [data-draw],
+  .js .draw-path,
+  .scribble-hover path {
+    stroke-dasharray: none !important;
+    stroke-dashoffset: 0 !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .scribble-hover path {
+    opacity: 0;
+  }
+  .group:hover .scribble-hover path,
+  .group:focus-visible .scribble-hover path,
+  .group[data-active] .scribble-hover path {
+    opacity: 1;
+  }
+  .js [data-draw-root]:not([data-drawn]) [data-draw-fade],
+  .js
+    [data-draw-root][data-draw-all]:not([data-drawn])
+    :is(path, circle, ellipse, rect, line, polyline, polygon),
+  .js .ink-in {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .js .hw-letter {
+    clip-path: none !important;
+    animation: none !important;
+  }
+  .wobble-once {
+    animation: none;
+  }
+  .spiral-path {
+    animation: none;
+    stroke-dasharray: none;
+  }
+  .spiral-pencil {
+    animation: none;
+    offset-distance: 100%;
+  }
+}
+
+@media print {
+  [data-draw],
+  .draw-path {
+    stroke-dasharray: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+  .hw-letter,
+  .ink-in {
+    clip-path: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* ─── Blog prose, in pencil ─────────────────────────────────────────────── */
+.prose {
+  --tw-prose-body: var(--color-graphite);
+  --tw-prose-headings: var(--color-graphite);
+  --tw-prose-links: var(--color-accent-blue);
+  --tw-prose-bold: var(--color-graphite);
+  --tw-prose-quotes: var(--color-graphite-2);
+  --tw-prose-code: var(--color-graphite);
+  --tw-prose-pre-bg: var(--color-paper-shade);
+  --tw-prose-pre-code: var(--color-graphite);
+}
+.prose :where(h1, h2, h3) {
+  font-family: var(--font-hand);
+  font-weight: 700;
 }
