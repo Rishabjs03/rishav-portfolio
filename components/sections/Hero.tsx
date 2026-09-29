@@ -143,6 +143,15 @@ export function Hero() {
 
       <div className="relative mx-auto w-full max-w-[26rem] md:max-w-none">
         <HeroElevation />
+        {/* Only where doodling works (mouse or stylus). */}
+        <Annotation
+          text="psst: drag on the paper to doodle"
+          direction="up-left"
+          color="blue"
+          delay={5.5}
+          immediate
+          className="absolute right-0 -bottom-10 hidden pointer-fine:inline-flex"
+        />
       </div>
 
       <Annotation
