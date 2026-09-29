@@ -32,6 +32,14 @@ export const SHAPES = "path, line, polyline, polygon, circle, ellipse, rect";
 
 export const HIDDEN_OFFSET = 1.01;
 
+/**
+ * GSAP's CSS plugin rounds px values to whole pixels by default. With
+ * pathLength="1" the whole draw happens between 1.01 and 0, so rounding
+ * would make every stroke snap from hidden to finished at the halfway point.
+ * Every dash tween must pass these vars.
+ */
+export const DASH_TWEEN = { autoRound: false } as const;
+
 /** Normalise strokes and put them in the pre-draw (hidden) state. */
 export function prepareStrokes(els: Element[]) {
   if (!els.length) return;
@@ -39,6 +47,7 @@ export function prepareStrokes(els: Element[]) {
     if (!el.hasAttribute("pathLength")) el.setAttribute("pathLength", "1");
   }
   gsap.set(els, {
+    ...DASH_TWEEN,
     strokeDasharray: "1 2",
     strokeDashoffset: HIDDEN_OFFSET,
     opacity: 1,
@@ -82,7 +91,7 @@ export function buildDrawTimeline(root: Element, opts: BuildOptions = {}) {
     timing,
     follower,
   } = opts;
-  const tl = gsap.timeline({ paused: true });
+  const tl = gsap.timeline({ paused: true, defaults: DASH_TWEEN });
   const phone = window.matchMedia("(max-width: 767px)").matches;
   tl.timeScale(motion.timeScale * (phone ? motion.mobileTimeScale : 1));
 

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { colors } from "@/lib/design-tokens";
-import { prepareStrokes } from "@/lib/draw";
+import { DASH_TWEEN, prepareStrokes } from "@/lib/draw";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import {
   useIsClient,
@@ -229,7 +229,7 @@ export function ScrollBuilding() {
       const q = (sel: string) => Array.from(root.querySelectorAll(sel));
       prepareStrokes(q("[data-draw]"));
 
-      const tl = gsap.timeline({ defaults: { ease: "none" } });
+      const tl = gsap.timeline({ defaults: { ease: "none", ...DASH_TWEEN } });
       tl.to(
         q('[data-draw="foundation"]'),
         { strokeDashoffset: 0, duration: 0.08, stagger: 0.012 },
@@ -282,7 +282,7 @@ export function ScrollBuilding() {
       if (!root) return;
       const q = (sel: string) => Array.from(root.querySelectorAll(sel));
       prepareStrokes(q("[data-draw]"));
-      const tl = gsap.timeline({ defaults: { ease: "none" } });
+      const tl = gsap.timeline({ defaults: { ease: "none", ...DASH_TWEEN } });
       tl.to(
         q('[data-draw="progress"]'),
         { strokeDashoffset: 0, duration: 1 },
@@ -477,7 +477,7 @@ export function ScrollBuilding() {
           ref={mobileRef}
           data-draw-root=""
           aria-hidden="true"
-          className="pointer-events-none fixed inset-x-0 top-[64px] z-40 flex items-end gap-2 px-4"
+          className="pointer-events-none fixed inset-x-0 top-1 z-40 flex items-end gap-2 px-4"
         >
           <svg
             viewBox="0 0 100 6"

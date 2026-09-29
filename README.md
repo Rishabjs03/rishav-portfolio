@@ -37,8 +37,8 @@ components/
     SmoothScroll.tsx    Lenis driven by GSAP's ticker, synced with ScrollTrigger
   sketch/               reusable sketch + motion primitives (see below)
   sections/             page sections: Navbar, Hero, HeroElevation, FeaturedProjects,
-                        ProjectSheet, Experience, ProofOfWork, PullRequestBoard,
-                        Skills, Contact, Footer, SectionHeader
+                        ProjectSheet, Experience, ProofOfWork, ContributionGraph,
+                        PullRequestBoard, Skills, Contact, Footer, SectionHeader
 lib/
   design-tokens.ts      colours, stroke widths, Rough.js presets, every motion timing
   sketch.ts             Rough.js + hand-rolled geometry: lines, sketchy rects, hatching,
@@ -88,7 +88,7 @@ All timings live in `lib/design-tokens.ts`.
 
 ## Proof of Work data
 
-`lib/github.ts` queries the GitHub search API for PRs by the site owner (merged, open, closed) on the server. Responses are cached with Next's data cache for an hour (`revalidate: 3600`, tag `github-prs`), so the home page stays static (ISR) and visitors never hit GitHub directly. If GitHub is unreachable, the section shows a friendly note instead of failing.
+`lib/github.ts` queries the GitHub search API for PRs by the site owner (merged, open, closed) on the server. It also fetches the contribution calendar for the sketched heatmap (GraphQL when `GITHUB_TOKEN` is set, otherwise the public github-contributions-api.jogruber.de service). Responses are cached with Next's data cache for an hour (`revalidate: 3600`, tag `github-prs`), so the home page stays static (ISR) and visitors never hit GitHub directly. If GitHub is unreachable, the section shows a friendly note instead of failing.
 
 ## Editing content
 

@@ -127,3 +127,117 @@ export async function getPullRequests(): Promise<PullRequestBuckets> {
   if (errors.length === states.length) out.error = errors[0];
   return out;
 }
+
+/*
+ * ─── Contribution calendar ───────────────────────────────────────────────
+ * The last year of daily contribution counts, for the sketched heatmap.
+ *
+ * With GITHUB_TOKEN set, it asks GitHub's GraphQL API directly (GraphQL
+ * always needs a token). Without one, or if that fails, it falls back to
+ * the public github-contributions-api.jogruber.de service, the same source
+ * the previous react-github-calendar widget used. Cached like the PRs.
+ */
+
+export type ContributionDay = {
+  date: string;
+  count: number;
+  level: 0 | 1 | 2 | 3 | 4;
+};
+export type ContributionCalendar = {
+  total: number;
+  days: ContributionDay[];
+} | null;
+
+const LEVELS: Record<string, ContributionDay["level"]> = {
+  NONE: 0,
+  FIRST_QUARTILE: 1,
+  SECOND_QUARTILE: 2,
+  THIRD_QUARTILE: 3,
+  FOURTH_QUARTILE: 4,
+};
+
+async function fromGraphQL(token: string): Promise<ContributionCalendar> {
+  const query = `query($login: String!) {
+    user(login: $login) {
+      contributionsCollection {
+        contributionCalendar {
+          totalContributions
+          weeks { contributionDays { date contributionCount contributionLevel } }
+        }
+      }
+    }
+  }`;
+  const res = await fetch("https://api.github.com/graphql", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+      "User-Agent": "rishav-portfolio",
+    },
+    body: JSON.stringify({ query, variables: { login: site.githubUser } }),
+    next: { revalidate: REVALIDATE_SECONDS, tags: ["github-contributions"] },
+  });
+  if (!res.ok) throw new Error(`GitHub GraphQL failed (${res.status})`);
+  const json = (await res.json()) as {
+    data?: {
+      user?: {
+        contributionsCollection: {
+          contributionCalendar: {
+            totalContributions: number;
+            weeks: Array<{
+              contributionDays: Array<{
+                date: string;
+                contributionCount: number;
+                contributionLevel: string;
+              }>;
+            }>;
+          };
+        };
+      };
+    };
+  };
+  const cal = json.data?.user?.contributionsCollection.contributionCalendar;
+  if (!cal) throw new Error("GitHub GraphQL returned no calendar");
+  return {
+    total: cal.totalContributions,
+    days: cal.weeks.flatMap((w) =>
+      w.contributionDays.map((d) => ({
+        date: d.date,
+        count: d.contributionCount,
+        level: LEVELS[d.contributionLevel] ?? 0,
+      })),
+    ),
+  };
+}
+
+async function fromPublicApi(): Promise<ContributionCalendar> {
+  const res = await fetch(
+    `https://github-contributions-api.jogruber.de/v4/${site.githubUser}?y=last`,
+    {
+      next: { revalidate: REVALIDATE_SECONDS, tags: ["github-contributions"] },
+    },
+  );
+  if (!res.ok) throw new Error(`Contributions API failed (${res.status})`);
+  const json = (await res.json()) as {
+    total: { lastYear: number };
+    contributions: ContributionDay[];
+  };
+  return { total: json.total.lastYear, days: json.contributions };
+}
+
+/** Never throws: returns null when no source answers. */
+export async function getContributions(): Promise<ContributionCalendar> {
+  const token = process.env.GITHUB_TOKEN;
+  if (token) {
+    try {
+      return await fromGraphQL(token);
+    } catch {
+      // fall through to the public API
+    }
+  }
+  try {
+    return await fromPublicApi();
+  } catch {
+    return null;
+  }
+}

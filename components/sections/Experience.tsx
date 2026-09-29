@@ -272,7 +272,7 @@ function Floor({ role, level }: { role: Role; level: number }) {
               >
                 <span
                   aria-hidden="true"
-                  className="bg-graphite-2 mt-[0.7em] h-px w-3 shrink-0"
+                  className="border-graphite-2 mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full border"
                 />
                 <span>
                   {b}

@@ -59,7 +59,9 @@ function SketchAvatar() {
 
 export function Navbar() {
   return (
-    <header className="bg-paper/85 fixed inset-x-0 top-0 z-50 backdrop-blur-[2px]">
+    // Overlays the top of the page and scrolls away with it (not sticky).
+    // The small top padding leaves room for the mobile progress ruler.
+    <header className="absolute inset-x-0 top-0 z-50 pt-2 xl:pt-0">
       <nav
         aria-label="Main"
         className="max-w-page mx-auto flex h-[60px] items-center justify-between px-5 sm:px-8"

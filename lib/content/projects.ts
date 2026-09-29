@@ -18,6 +18,25 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: "Clicky SDK",
+    description:
+      "An AI-powered UI guidance overlay for React Native and Expo apps. Users speak or type a question and Clicky highlights the relevant UI elements with step-by-step animated guidance, triggered by a shake, a volume-button triple-press or from code. Demoed on a UPI payments app to walk a first-time user through paying. Co-built with @shukla_pritika.",
+    media: {
+      type: "video",
+      src: "/clicky-sdk.mp4",
+      poster: "/clicky-sdk-poster.jpg",
+      portrait: true,
+    },
+    tech: ["React Native", "Expo", "TypeScript", "Reanimated"],
+    github: "https://github.com/Rishabjs03/clicky-sdk",
+    demo: {
+      href: "https://x.com/vineetwts/status/2042560329864143285",
+      label: "demo on X ↗",
+    },
+    date: "APR 2026",
+    featured: true,
+  },
+  {
     title: "Gemini-Supermemory",
     description:
       "A Gemini CLI extension providing persistent AI memory across sessions and projects using Supermemory. Features auto-capture, codebase architecture indexing, and team-shared knowledge via MCP tools.",
@@ -35,25 +54,6 @@ export const projects: Project[] = [
     tech: ["Python", "MediaPipe", "OpenCV"],
     github: "https://github.com/Rishabjs03/MacClaw",
     date: "MAR 2026",
-    featured: true,
-  },
-  {
-    title: "Clicky SDK",
-    description:
-      "An AI-powered UI guidance overlay for React Native and Expo apps. Users speak or type a question and Clicky highlights the relevant UI elements with step-by-step animated guidance, triggered by a shake, a volume-button triple-press or from code. Demoed on a UPI payments app to walk a first-time user through paying. Co-built with @shukla_pritika.",
-    media: {
-      type: "video",
-      src: "/clicky-sdk.mp4",
-      poster: "/clicky-sdk-poster.jpg",
-      portrait: true,
-    },
-    tech: ["React Native", "Expo", "TypeScript", "Reanimated"],
-    github: "https://github.com/Rishabjs03/clicky-sdk",
-    demo: {
-      href: "https://x.com/vineetwts/status/2042560329864143285",
-      label: "demo on X ↗",
-    },
-    date: "APR 2026",
     featured: true,
   },
   {
