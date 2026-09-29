@@ -9,6 +9,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { site } from "@/lib/content/site";
 import { AppProviders } from "@/components/providers/AppProviders";
+import { DoodleLayer } from "@/components/sketch/DoodleLayer";
 import { FocusScribble } from "@/components/sketch/FocusScribble";
 import { PencilCursor } from "@/components/sketch/PencilCursor";
 import { PencilDefs } from "@/components/sketch/PencilDefs";
@@ -101,6 +102,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <DoodleLayer />
           <PencilCursor />
           <FocusScribble />
         </AppProviders>

@@ -15,8 +15,8 @@ npm run lint
 
 ### Environment
 
-| Variable       | Where       | Why                                                                                                                             |
-| -------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Variable       | Where       | Why                                                                                                               |
+| -------------- | ----------- | ----------------------------------------------------------------------------------------------------------------- |
 | `GITHUB_TOKEN` | server only | Optional. Raises the GitHub search rate limit for the Proof of Work section. Never prefix it with `NEXT_PUBLIC_`. |
 
 Put it in `.env.local` for development (git-ignored) and in the Vercel project settings for production.
@@ -52,24 +52,25 @@ lib/
 
 ### Sketch components
 
-| Component                 | What it does                                                                                     |
-| ------------------------- | ------------------------------------------------------------------------------------------------ |
-| `PencilDefs`              | Shared SVG filters (`#pencil`, `#pencil-grain`, `#pencil-boil-N`) and hatch patterns.             |
-| `SketchBorder`            | Measured box with an overshooting, double-stroked Rough.js border. Redraws with a new seed on hover. |
-| `SketchLine`              | Hand-drawn divider that stretches to its container.                                              |
-| `DrawOnSVG`               | Draws `[data-draw]` strokes layer by layer on load, on view, or scrubbed to scroll.               |
-| `Boil`                    | Line boil: swaps pencil filters at ~8fps while on screen.                                         |
-| `HandwrittenHeading`      | Letter-by-letter handwriting reveal plus a scribbled underline.                                  |
-| `ScribbleButton`          | Buttons/links that get a scribbled loop or underline on hover and focus.                          |
-| `PencilCursor`            | The pencil cursor; loops small targets on hover.                                                 |
-| `FocusScribble`           | Keyboard focus ring drawn as a pencil loop.                                                      |
-| `BlueprintCard`           | Drawing sheet with crop marks and a title block.                                                 |
-| `TapedMedia`, `LazyVideo` | Media taped into the sketchbook; videos load only near the viewport.                             |
-| `TechSticker`             | Hand-lettered tech tags.                                                                         |
-| `Annotation`              | Handwritten margin note with a pencil arrow.                                                     |
-| `ScrollBuilding`          | The building constructed in the margin as you scroll (a ruler + house on small screens).          |
-| `EraserTransition`        | Route transitions: the page is rubbed out, then the new one sketches in. Use `TransitionLink`.    |
-| `SpiralLoader`            | Pure-CSS pencil tracing a spiral (the PR loading state).                                         |
+| Component                 | What it does                                                                                                    |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `PencilDefs`              | Shared SVG filters (`#pencil`, `#pencil-grain`, `#pencil-boil-N`) and hatch patterns.                           |
+| `SketchBorder`            | Measured box with an overshooting, double-stroked Rough.js border. Redraws with a new seed on hover.            |
+| `SketchLine`              | Hand-drawn divider that stretches to its container.                                                             |
+| `DrawOnSVG`               | Draws `[data-draw]` strokes layer by layer on load, on view, or scrubbed to scroll.                             |
+| `Boil`                    | Line boil: swaps pencil filters at ~8fps while on screen.                                                       |
+| `HandwrittenHeading`      | Letter-by-letter handwriting reveal plus a scribbled underline.                                                 |
+| `ScribbleButton`          | Buttons/links that get a scribbled loop or underline on hover and focus.                                        |
+| `PencilCursor`            | The pencil cursor; loops small targets on hover.                                                                |
+| `FocusScribble`           | Keyboard focus ring drawn as a pencil loop.                                                                     |
+| `DoodleLayer`             | Lets the pencil draw: drag on empty paper (mouse or stylus) to doodle; Ctrl/⌘+Z undoes, "erase doodles" clears. |
+| `BlueprintCard`           | Drawing sheet with crop marks and a title block.                                                                |
+| `TapedMedia`, `LazyVideo` | Media taped into the sketchbook; videos load only near the viewport.                                            |
+| `TechSticker`             | Hand-lettered tech tags.                                                                                        |
+| `Annotation`              | Handwritten margin note with a pencil arrow.                                                                    |
+| `ScrollBuilding`          | The building constructed in the margin as you scroll (a ruler + house on small screens).                        |
+| `EraserTransition`        | Route transitions: the page is rubbed out, then the new one sketches in. Use `TransitionLink`.                  |
+| `SpiralLoader`            | Pure-CSS pencil tracing a spiral (the PR loading state).                                                        |
 
 ## How the motion works (and how to tweak it)
 
