@@ -1,22 +1,76 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import Footer from "@/components/footer";
-import Navbar from "@/components/Navbar";
-import { Instrument_Serif } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import {
+  Architects_Daughter,
+  Caveat,
+  Inter,
+  JetBrains_Mono,
+} from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { ThemeProvider } from "@/components/theme-provider";
-import ParticleNetwork from "@/components/ui/particle-network";
+import { site } from "@/lib/content/site";
+import { AppProviders } from "@/components/providers/AppProviders";
+import { FocusScribble } from "@/components/sketch/FocusScribble";
+import { PencilCursor } from "@/components/sketch/PencilCursor";
+import { PencilDefs } from "@/components/sketch/PencilDefs";
+import { ScrollBuilding } from "@/components/sketch/ScrollBuilding";
+import { Footer } from "@/components/sections/Footer";
+import { Navbar } from "@/components/sections/Navbar";
+import "./globals.css";
 
-const instrumentSerif = Instrument_Serif({
-  weight: ["400"],
-  subsets: ["latin"], // 🛠 Fix missing subsets
+// Headings: a quick, legible handwriting. Preloaded: it's in the hero.
+const caveat = Caveat({
+  subsets: ["latin"],
+  variable: "--font-caveat",
+  display: "swap",
+});
+// Annotations, labels, title blocks: classic architect's lettering.
+const architects = Architects_Daughter({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-architects",
+  display: "swap",
+});
+// Body copy.
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+// Dimensions, sheet numbers, dates.
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
-  title: "Rishav",
-  description: "I'm a Full-stack Developer and AI enthusiast",
+  title: site.title,
+  description: site.description,
+  openGraph: {
+    title: site.title,
+    description: site.description,
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: site.title,
+    description: site.description,
+    creator: "@Yrishavjs",
+  },
 };
+
+export const viewport: Viewport = {
+  themeColor: "#FDFDFB",
+  colorScheme: "light",
+};
+
+/*
+ * Runs before first paint: marks the document as JS-capable so drawings can
+ * start hidden and draw themselves in. Without JS the class never appears
+ * and every drawing is simply shown finished.
+ */
+const bootScript = `document.documentElement.classList.add("js")`;
 
 export default function RootLayout({
   children,
@@ -24,20 +78,34 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      {" "}
-      {/* 🛠 Important for dark mode */}
-      <body
-        className={`${instrumentSerif.className} bg-neutral-50 antialiased transition-colors duration-300 [--pattern-fg:var(--color-neutral-200)] dark:bg-neutral-950`}
-      >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Analytics />
-          <SpeedInsights />
-          <ParticleNetwork />
+    <html
+      lang="en"
+      className={`${caveat.variable} ${architects.variable} ${inter.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: bootScript }} />
+      </head>
+      <body className="text-graphite font-sans antialiased">
+        <a
+          href="#main"
+          className="focus:bg-paper focus:font-arch sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[200] focus:px-3 focus:py-2"
+        >
+          Skip to content
+        </a>
+        <PencilDefs />
+        <AppProviders>
           <Navbar />
-          <main className="min-h-screen">{children}</main>
+          <ScrollBuilding />
+          <main id="main" className="max-w-page relative mx-auto px-5 sm:px-8">
+            {children}
+          </main>
           <Footer />
-        </ThemeProvider>
+          <PencilCursor />
+          <FocusScribble />
+        </AppProviders>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
