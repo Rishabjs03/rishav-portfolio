@@ -111,7 +111,9 @@ export function Hero() {
           ))}
         </ul>
 
-        <div className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-3">
+        {/* The note sits under the button, its arrow curving up into it, so
+            it points at the button whatever the column width. */}
+        <div className="mt-10 flex flex-col items-start">
           <ScribbleButton href={site.bookCall} external size="md">
             Book a call
             <svg
@@ -132,25 +134,27 @@ export function Hero() {
           </ScribbleButton>
           <Annotation
             text="30 min, no slides, let's build something"
-            direction="left"
+            direction="up-left"
             color="blue"
             delay={2.2}
             immediate
-            textClassName="text-[13px] sm:text-sm whitespace-normal sm:whitespace-nowrap max-w-[11rem] sm:max-w-none"
+            className="-mt-1 ml-20 flex-row items-end"
+            textClassName="text-[13px] sm:text-sm whitespace-normal sm:whitespace-nowrap max-w-[11rem] sm:max-w-none pb-0.5"
           />
         </div>
       </div>
 
       <div className="relative mx-auto w-full max-w-[26rem] md:max-w-none">
         <HeroElevation />
-        {/* Only where doodling works (mouse or stylus). */}
+        {/* Only where doodling works (mouse or stylus). Its own row under the
+            drawing, so it never overlaps the drawing's title. */}
         <Annotation
           text="psst: drag on the paper to doodle"
-          direction="up-left"
+          direction="left"
           color="blue"
           delay={5.5}
           immediate
-          className="absolute right-0 -bottom-10 hidden pointer-fine:inline-flex"
+          className="mt-4 ml-auto hidden w-fit pointer-fine:flex"
         />
       </div>
 
