@@ -37,6 +37,25 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    title: "lucidiff",
+    description:
+      "Turns a pull request into a self-contained, interactive HTML explainer for reviewing code you didn't write: a plain-English summary, per-file change cards, a flow diagram, risks cited to exact lines in the diff, and a test checklist. The model only fills a validated JSON schema, and every citation is checked against the diff before rendering. Works on GitHub PRs, local git ranges or any diff.",
+    media: {
+      type: "video",
+      src: "/lucidiff.mp4",
+      poster: "/lucidiff-poster.jpg",
+    },
+    tech: ["TypeScript", "Node.js", "AI SDK", "Zod", "Mermaid"],
+    github: "https://github.com/Rishabjs03/pr-karpathy",
+    live: "https://rishabjs03.github.io/pr-karpathy/",
+    demo: {
+      href: "https://x.com/yrishavjs/status/2106339914195607728",
+      label: "demo on X ↗",
+    },
+    date: "OCT 2026",
+    featured: true,
+  },
+  {
     title: "Gemini-Supermemory",
     description:
       "A Gemini CLI extension providing persistent AI memory across sessions and projects using Supermemory. Features auto-capture, codebase architecture indexing, and team-shared knowledge via MCP tools.",
