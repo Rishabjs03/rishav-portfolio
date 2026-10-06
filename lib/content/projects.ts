@@ -1,6 +1,13 @@
 export type Media =
   | { type: "image"; src: string; portrait?: boolean }
-  | { type: "video"; src: string; poster?: string; portrait?: boolean };
+  | {
+      type: "video";
+      src: string;
+      poster?: string;
+      portrait?: boolean;
+      /** Show a sound toggle: for demos where the audio is the point. */
+      sound?: boolean;
+    };
 
 export type Project = {
   title: string;
@@ -34,6 +41,26 @@ export const projects: Project[] = [
       label: "demo on X ↗",
     },
     date: "APR 2026",
+    featured: true,
+  },
+  {
+    title: "clacky",
+    description:
+      "Your GitHub contribution graph as a grid of clickable mechanical keycaps. Every day is a key: press one and it bottoms out, springs back with a physically simulated return and clicks like a real switch, using real Blue, Brown, Red and Cream switch recordings. Pure-CSS keycaps, 8 themes, keyboard accessible, and it ships as both a React component and a zero-dependency web component.",
+    media: {
+      type: "video",
+      src: "/clacky.mp4",
+      poster: "/clacky-poster.jpg",
+      sound: true,
+    },
+    tech: ["TypeScript", "React", "Web Components", "Motion"],
+    github: "https://github.com/Rishabjs03/keyboard-graph",
+    live: "https://clacky.rishabjs.xyz",
+    demo: {
+      href: "https://x.com/yrishavjs/status/2107120390120288277",
+      label: "demo on X ↗",
+    },
+    date: "OCT 2026",
     featured: true,
   },
   {
