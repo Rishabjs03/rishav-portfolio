@@ -129,6 +129,7 @@ export function TapedMedia({
               src={media.src}
               poster={media.poster}
               label={alt}
+              sound={media.sound}
               className="saturate-[.8] group-hover/media:saturate-100"
             />
           )}
